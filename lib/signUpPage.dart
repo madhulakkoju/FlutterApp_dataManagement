@@ -33,7 +33,7 @@ class SignUpWidget extends StatefulWidget {
 
 class SignUpWidgetState extends State<StatefulWidget>{
   final _formKey = GlobalKey<FormState>();
-  int day = 1,month = 1,year = 1960 ;
+
   @override
   Widget build(BuildContext context){
     String _name,_email,_password1,_password2;
