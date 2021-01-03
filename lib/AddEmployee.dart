@@ -1,4 +1,6 @@
 
+import 'package:flutter_app_learning/userPreview.dart';
+
 import 'MediaAccessSupport.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -12,9 +14,10 @@ class AddEmployeeData extends StatefulWidget{
 }
 
 class AddEmployee extends State<StatefulWidget>{
-  Key _employeeDataKey;
-
+  final _employeeDataKey = GlobalKey<FormState>();
   static String profilePicture = "assets/images/noPicture.jpg";
+  String fullName,organization,empId,mobile,email,idCardPath = profilePicture;
+
   @override
   Widget build(BuildContext context) {
     double pagewidth = MediaQuery.of(context).size.width ;
@@ -113,6 +116,10 @@ class AddEmployee extends State<StatefulWidget>{
            onChanged: (value){
              print(value);
            },
+           onSaved: (value){
+             fullName = value;
+             // Save this data into the USER constructor for Object creation.
+           },
            onFieldSubmitted: (value){},
            autocorrect: false,
            autovalidate: true,
@@ -136,6 +143,10 @@ class AddEmployee extends State<StatefulWidget>{
            onChanged: (value){},
            autovalidate: true,
            autocorrect: false,
+           onSaved: (value){
+             organization = value;
+             // Save this data into the USER constructor for Object creation.
+           },
 
          ),
 
@@ -152,6 +163,10 @@ class AddEmployee extends State<StatefulWidget>{
            onChanged: (value){},
            autovalidate: true,
            autocorrect: false,
+           onSaved: (value){
+             empId = value;
+             // Save this data into the USER constructor for Object creation.
+           },
          ),
 
          //Mobile No
@@ -168,6 +183,10 @@ class AddEmployee extends State<StatefulWidget>{
            onChanged: (value){},
            autovalidate: true,
            autocorrect: false,
+           onSaved: (value){
+             mobile = value;
+             // Save this data into the USER constructor for Object creation.
+           },
          ),
 
          //email address
@@ -183,6 +202,10 @@ class AddEmployee extends State<StatefulWidget>{
            onChanged: (value){},
            autovalidate: true,
            autocorrect: false,
+           onSaved: (value){
+             email = value;
+             // Save this data into the USER constructor for Object creation.
+           },
          ),
 
          // Preview button and Submit button
@@ -191,7 +214,14 @@ class AddEmployee extends State<StatefulWidget>{
             children: <Widget>[
               // preview button
               ElevatedButton(
-                  onPressed: (){},
+                  onPressed: (){
+                    setState(() {
+
+                    });
+                    // open a preview page to show athe registration details of the Applicant / Employee
+                    var form = _employeeDataKey.currentState;
+                    this.showPreview(form);
+                  },
                   child: Text("Preview"),
               ),
 
@@ -207,5 +237,17 @@ class AddEmployee extends State<StatefulWidget>{
      ),
     )
     );
+  }
+
+  void showPreview(var form){
+    if(! form.validate()){
+      print("Wrong inputs upon preview button Tap");
+    }
+    form.save();
+
+    Navigator.push(context,MaterialPageRoute(builder: (context){
+      return UserPreview(fullName,organization,empId,mobile,email,idCardPath);
+    }));
+
   }
 }

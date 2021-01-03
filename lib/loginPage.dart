@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(LoginPage());
+
 
 class LoginPage extends StatelessWidget{
   static const String _title = "Company";
@@ -27,13 +27,13 @@ class LoginWidget extends StatefulWidget{
 }
 
 class LoginWidgetState extends State<StatefulWidget>{
-  final _formKey = GlobalKey<FormState>();
+  final formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context){
-    String _email,_password;
+    String _email="",_password="";
     return Form(
-        key: _formKey,
+        key: formKey,
         child: Center(
           child:Column(
             mainAxisAlignment: MainAxisAlignment.center ,
@@ -93,11 +93,11 @@ class LoginWidgetState extends State<StatefulWidget>{
                   child: RaisedButton(
                     child: Text("Login"),
                     onPressed: (){
-                      var form = _formKey.currentState;
+                      var form = formKey.currentState;
                       if(form.validate()){
                         form.save();
                       }
-                      print(_email +"  "+ _password);
+                      print(_email + "  " + _password);
                       // perform Authentication
 
                     },
