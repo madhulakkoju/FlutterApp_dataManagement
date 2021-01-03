@@ -16,7 +16,7 @@ class AddEmployeeData extends StatefulWidget{
 class AddEmployee extends State<StatefulWidget>{
   final _employeeDataKey = GlobalKey<FormState>();
   static String profilePicture = "assets/images/noPicture.jpg";
-  String fullName,organization,empId,mobile,email,idCardPath = profilePicture;
+  String fullName='',organization='',empId='',mobile='',email='',idCardPath = profilePicture;
 
   @override
   Widget build(BuildContext context) {
